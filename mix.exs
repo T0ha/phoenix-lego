@@ -20,7 +20,18 @@ defmodule PhoenixLego.MixProject do
   def application do
     [
       mod: {PhoenixLego.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [
+        :logger,
+        :runtime_tools,
+        :arc_ecto,
+        :comeonin,
+        :postgrex,
+        :timex,
+        :recaptcha,
+        #:scrivener_ecto,
+        #:scrivener_html,
+        :bamboo
+      ]
     ]
   end
 
@@ -46,7 +57,41 @@ defmodule PhoenixLego.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+
+      # Image to DB and S3
+      {:arc, "~> 0.11.0"},
+      {:arc_ecto, "~> 0.11.3"},
+      {:ex_aws, "~> 2.0"},
+      {:ex_aws_s3, "~> 2.0"},
+
+      # DateTime workaround
+      {:timex, "~> 3.6"},
+
+      # Testing stuff
+      {:ex_machina, "~> 2.4"},
+      {:faker, "~> 0.13"},
+      {:dialyxir, "~> 1.0.0", only: [:dev], runtime: false},
+
+      # Passwords and crypto
+      {:bcrypt_elixir, "~> 2.2.0"},
+      {:comeonin, "~> 5.3.0"},
+
+
+      # Pagination seems not supported yet by latest ecto
+      #{:scrivener_ecto, "~> 2.0"},
+      #{:scrivener_html, "~> 1.8"},
+      
+      # Data types for convinience
+      {:uuid, "~> 1.1"},
+      {:ecto_enum, "~> 1.4"},
+
+
+      # Sending emails
+      {:bamboo, "~> 1.5"},
+
+      # Recaptcha
+      {:recaptcha, "~> 3.0"}
     ]
   end
 
