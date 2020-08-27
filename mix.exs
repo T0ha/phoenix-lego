@@ -76,6 +76,7 @@ defmodule PhoenixLego.MixProject do
       # Passwords and crypto
       {:bcrypt_elixir, "~> 2.2.0"},
       {:comeonin, "~> 5.3.0"},
+      {:pow, "~> 1.0.20"},
 
 
       # Pagination seems not supported yet by latest ecto

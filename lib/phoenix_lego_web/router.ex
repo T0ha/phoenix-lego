@@ -1,5 +1,6 @@
 defmodule PhoenixLegoWeb.Router do
   use PhoenixLegoWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -10,14 +11,26 @@ defmodule PhoenixLegoWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :auth do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", PhoenixLegoWeb do
-    pipe_through :browser
+    pipe_through [:browser, :auth]
 
     live "/", PageLive, :index
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
+
   end
 
   # Other scopes may use custom stacks.
@@ -37,6 +50,7 @@ defmodule PhoenixLegoWeb.Router do
 
     scope "/" do
       pipe_through :browser
+
       live_dashboard "/dashboard", metrics: PhoenixLegoWeb.Telemetry
     end
   end

@@ -18,6 +18,10 @@ config :phoenix_lego, PhoenixLegoWeb.Endpoint,
   pubsub_server: PhoenixLego.PubSub,
   live_view: [signing_salt: "LBGKyUYY"]
 
+config :phoenix_lego,
+  repo: PhoenixLego.Repo,
+  user: PhoenixLego.Users.User
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
